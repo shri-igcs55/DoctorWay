@@ -13,7 +13,7 @@
 
 			$this->load->model('signup_model');
 			//$this->load->library('seekahoo_lib');
-}
+		}
 		
 		public function user_signup_post()
 		{

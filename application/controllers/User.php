@@ -15,7 +15,7 @@
 			$this->load->library('email');
 			$this->load->library('upload');
 			//$this->load->library('seekahoo_lib');
-}
+    	}
 		
 		public function user_signup_post()
 		{
@@ -94,6 +94,7 @@
 			   
 			               curl_close($ch);
 			               json_decode($retVals1);	
+			               
 					      }
 
      		          //echo $retVals1 = $this->user_model->signup($ip, $serviceName);
@@ -118,6 +119,7 @@
 			if ($validation_array !=1) {
 				$data['message'] = $validation_array;
 				$retVals = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
+				json_decode($retVals1);
 			} 
 			else {
 				$retVals = $this->user_model->check_signin($ip, $serviceName);
@@ -144,7 +146,7 @@ public function verify_post()
             } 
             else
             {
-                $chkotp=$this->verify_model->check_otp($ip);
+                $chkotp=$this->user_model->check_otp($ip);
                
                  if($chkotp=="true")
                  {
@@ -171,6 +173,7 @@ public function verify_post()
 	            {
     	        	$data['message'] = "OTP Not Matching";
 			    	$retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
+			    	json_decode($retVals1);
            	    }
         }
 	        //echo $retVals1 = $this->signup_model->signup($ip, $serviceName);
@@ -234,6 +237,7 @@ public function verify_post()
 		             {
 		             	$data['message'] = "Please Sign up first";
 					    $retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);	
+					    json_decode($retVals1);
 		             }
 
 				        
@@ -304,21 +308,21 @@ public function verify_post()
 					else*/ 
                     if($ip['new_pass'] != $ip['c_pass'])
 					 {
-				     $data['message'] = "Password missmatch.";
-				     $retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
+				     	$data['message'] = "Password missmatch.";
+				     	$retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
                      }
 
 					else if ($validation_array !=1) 
 					{
-					 $data['message'] = $validation_array;
-					 $retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
+					 	$data['message'] = $validation_array;
+					 	$retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
 					} 
 
 					else if ($chk_pass=="True") 
 					{
 					 //$done_simple=$this->update_model->updt_status_simple($ip);
-					 $data['message'] = "Paasword matched";
-					 $retVals1 = $this->seekahoo_lib->return_status('success', $serviceName, $data, $ipJson);
+						 $data['message'] = "Paasword matched";
+					 	 $retVals1 = $this->seekahoo_lib->return_status('success', $serviceName, $data, $ipJson);
 
 					 /*===============Sending Otp==================*/
                          $ch = curl_init();
@@ -329,20 +333,21 @@ public function verify_post()
 			               $buffer = curl_exec($ch);
 			   
 			               curl_close($ch);
-					  /*===============Sending Otp===================*/
+						  /*===============Sending Otp===================*/
 					} 
 					else  
 					{
-					  //$done_otp=$this->update_model->updt_status_with($ip);
-					  $data['message'] = "Paasword not matched from database";
-					  $retVals1 = $this->seekahoo_lib->return_status('success', $serviceName, $data, $ipJson);
+					  	//$done_otp=$this->update_model->updt_status_with($ip);
+					  	$data['message'] = "Paasword not matched from database";
+					  	$retVals1 = $this->seekahoo_lib->return_status('success', $serviceName, $data, $ipJson);
+					  	json_decode($retVals1);
 					  
 					}
 
-     		          //echo $retVals1 = $this->signup_model->signup($ip, $serviceName);
-			          header("content-type: application/json");
-			          echo $retVals1;
-			          exit;
+     		         	//echo $retVals1 = $this->signup_model->signup($ip, $serviceName);
+			          	header("content-type: application/json");
+			            echo $retVals1;
+			            exit;
 	     	}     
 
 
@@ -370,19 +375,19 @@ public function update_post()
            // print_r($ip); exit();
 			if (!null==($ipJson = json_encode($ip)))
                 {
-               	/*=================GENRAING OTP=====================*/
-	            $user="developer27788@indglobal-consulting.com:indglobal123";
+	               	/*=================GENRAING OTP=====================*/
+		            $user="developer27788@indglobal-consulting.com:indglobal123";
 
-			    $sender="TEST SMS";
-			    $number = $ip['mobile'];
-			    $message="Your One Time Password is :".$six_digit_random_number." For confirm the registration. Please do not share this password with Anyone - DOCTORWAY"; 
-			    $ipJson = json_encode($ip);
+				    $sender="TEST SMS";
+				    $number = $ip['mobile'];
+				    $message="Your One Time Password is :".$six_digit_random_number." For confirm the registration. Please do not share this password with Anyone - DOCTORWAY"; 
+				    $ipJson = json_encode($ip);
 
 
-                //$uploadPhoto[] = array('profile_org_url'=>'', 'type'=>'image', 'profile_thumb_url'=>'', 'photo_id'=>'');
+	                //$uploadPhoto[] = array('profile_org_url'=>'', 'type'=>'image', 'profile_thumb_url'=>'', 'photo_id'=>'');
 
-			    $chkmob=$this->user_model->check_update($ip);
-                /*=================ENDING OF GENRAING OTP=====================*/
+				    $chkmob=$this->user_model->check_update($ip);
+	                /*=================ENDING OF GENRAING OTP=====================*/
 				}
 			
 			//validation
@@ -397,33 +402,33 @@ public function update_post()
 					
 					if ($this->user_model->check_mob_u($ip)) 
 					{
-					 $data['message'] = 'Mobile number alerady registered.';
-					 $retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
+						 $data['message'] = 'Mobile number alerady registered.';
+						 $retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
 					} 
 
 					else if ($this->user_model->check_email_u($ip)) 
 					{
-					 $data['message'] = 'Email address alerady registered.';
-					 $retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
+						 $data['message'] = 'Email address alerady registered.';
+						 $retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
 					}
 
 					else if ($validation_array !=1) 
 					{
-					 $data['message'] = $validation_array;
-					 $retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
+						 $data['message'] = $validation_array;
+						 $retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
 					} 
 
 					else if ($chkmob=="True") 
 					{
-				//$done_simple=$this->update_model->updt_status_simple($ip,$uploadPhotos);
-					 $data['message'] = "Profile updated succesfully";
-					 $retVals1 = $this->seekahoo_lib->return_status('success', $serviceName, $data, $ipJson);
+					     //$done_simple=$this->update_model->updt_status_simple($ip,$uploadPhotos);
+						 $data['message'] = "Profile updated succesfully";
+						 $retVals1 = $this->seekahoo_lib->return_status('success', $serviceName, $data, $ipJson);
 					} 
 					else  
 					{
-					//$done_otp=$this->update_model->updt_status_with($ip,$uploadPhotos);
-					  $data['message'] = "Profile updated status pending";
-					  $retVals1 = $this->seekahoo_lib->return_status('success', $serviceName, $data, $ipJson);
+						//$done_otp=$this->update_model->	updt_status_with($ip,$uploadPhotos);
+					  	$data['message'] = "Profile updated status pending";
+					  	$retVals1 = $this->seekahoo_lib->return_status('success', $serviceName, $data, $ipJson);
 					  /*===============Sending Otp==================*/
                          $ch = curl_init();
 			               curl_setopt($ch,CURLOPT_URL,  "http://api.mVaayoo.com/mvaayooapi/MessageCompose");
@@ -433,20 +438,21 @@ public function update_post()
 			               $buffer = curl_exec($ch);
 			   
 			               curl_close($ch);
+			               json_decode($retVals1);
 					  /*===============Sending Otp===================*/
 
-                    // $patient_id = $ip['patient_id'];
-					  //$upic = $_FILES['user_pic'];
-					  //echo $retvals = $this->add_media_post($ip,$patient_id,$upic,'profile');
+                    	  // $patient_id = $ip['patient_id'];
+					 	  //$upic = $_FILES['user_pic'];
+					      //echo $retvals = $this->add_media_post($ip,$patient_id,$upic,'profile');
 
 
 
 					} 
         
-                      //echo $retVals1 = $this->signup_model->signup($ip, $serviceName);
-			          header("content-type: application/json");
-			          echo $retVals1;
-			          exit;
+                         //echo $retVals1 = $this->signup_model->signup($ip,  $serviceName);
+			             header("content-type: application/json");
+			             echo $retVals1;
+			             exit;
 	     	}
  
 
@@ -526,7 +532,7 @@ public function update_post()
                 $data['message'] = "Mobile number is null....";
 				$retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
 		         //json_decode($retVals1);	
-				}
+			}
 			    else 
 			    {    
 			    	 $chkmob=$this->user_model->recover($ip);
@@ -565,6 +571,7 @@ public function update_post()
 		             {
 		             	$data['message'] = "Please Sign up first";
 					    $retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);	
+					    json_decode($retVals1);
 		             }
 
 				        
@@ -575,8 +582,45 @@ public function update_post()
 	     	}  
 
 
-/*Forget password(Recover) Section*/
-/* Forget password(Recover) Section*/
+/*End of Forget (Recover) Section*/
+/*View details Section Starts*/
+public function viewdet_post()
+		{
+			$serviceName = 'View detail';
+			//getting posted values
+			$ip['user_id'] = trim($this->input->post('user_id'));
+						
+			$ipJson = json_encode($ip);
+           
+			//validation
+			$validation_array = 1;
+									
+					$ip_array[] = array("user_id", $ip['user_id'], "not_null", "user_id", "Users id is empty.");
+					
+
+					$validation_array = $this->validator->validate($ip_array);
+			
+					if ($validation_array !=1) 
+					{
+					 $data['message'] = $validation_array;
+					 $retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
+					} 
+					else if (isset($ip['user_id'])) 
+					{      
+						 $data['data'] = $this->user_model->view_det($ip,$serviceName);
+					     $retVals1 = $this->seekahoo_lib->return_status('success', $serviceName, $data, $ipJson);
+
+					     json_decode($retVals1);
+					}
+					
+     		          //echo $retVals1 = $this->signup_model->signup($ip, $serviceName);
+			          header("content-type: application/json");
+			          echo $retVals1;
+			          exit;
+	     	}
+
+/*End of View details Section*/
+/*Favrourite Submission Section Starts*/
 
 	}
 ?>

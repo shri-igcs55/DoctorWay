@@ -8,50 +8,50 @@
 	*/
 	class Top_hospitals extends REST_Controller
 	{
-		public function hospitals() {
+		public function Top_hospitals() {
 			parent::__construct();
 
-			$this->load->model('Top_hosp_model');
+			 $this->load->model('top_hosp_model');
 			//$this->load->library('seekahoo_lib');
-}
+		}
 		
 		public function hospitals_post()
 		{
 			$serviceName = 'hospitals';
 			//getting posted values
 			$ip['show_type'] = trim($this->input->post('show_type'));
-			
-
+			$ipJson = json_encode($ip);
 			    if (($ip['show_type'])==1)
                 {
-               	  $hi =$this->Top_hosp_model->top_hospital($ip['show_type']);
-               		var_dump($hi);exit();
-				}
+                	$data['top_hospitals'] =$this->top_hosp_model->top_hospital($ip);
+                    $retVals1 = $this->seekahoo_lib->return_status('success', $serviceName, $data, $ipJson);
+               	}
 				else
 				{
-                  $all_hospitals=$this->Top_hosp_model->top_hospital($ip['top_hospital']);
+                    $data['all_hospitals'] =$this->top_hosp_model->all_hospital($ip);
+                    $retVals1 = $this->seekahoo_lib->return_status('success', $serviceName, $data, $ipJson);
 				}
-			$ipJson = json_encode($ip);
-			//validation
-			$validation_array = 1;
-									
-					$ip_array[] = array("show_type", $ip['show_type'], "not_null", "show_type", "Field is empty.");
 				
-					$validation_array = $this->validator->validate($ip_array);
-					
-					
-            if ($validation_array !=1) 
-					{
-					 $data['message'] = $validation_array;
-					 $retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
-					} 
+				//validation
+				$validation_array = 1;
+									
+				$ip_array[] = array("show_type", $ip['show_type'], "not_null", "show_type", "Field is empty.");
+			
+				$validation_array = $this->validator->validate($ip_array);
+				
+				
+        		if ($validation_array !=1) 
+				{
+				 $data['message'] = $validation_array;
+				 $retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
+				} 
 
 
 
-			          header("content-type: application/json");
-			          echo $retVals1;
-			          exit;
-	     	}
+		          header("content-type: application/json");
+		          echo $retVals1;
+		          exit;
+	    }
 
 	}
 ?>

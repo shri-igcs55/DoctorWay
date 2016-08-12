@@ -432,36 +432,79 @@ function check_update($input)
 
 function recover($input) 
     {
-      $ipJson = json_encode($input);
-        //var_dump($ipJson);exit();
-      $this->db->select('*');
-      $this->db->from('user_reg');
-      $this->db->where('phone_number',$input['mobile'] );
-      $query = $this->db->get();
-      $details = $query->result();
-          //echo $this->db->last_query();
-      $result = $query->num_rows();
-      if ($result > 0 ){
-        //print_r($details); die();
-        return true;
-      }
-      return false; 
+        $ipJson = json_encode($input);
+          //var_dump($ipJson);exit();
+        $this->db->select('*');
+        $this->db->from('user_reg');
+        $this->db->where('phone_number',$input['mobile'] );
+        $query = $this->db->get();
+        $details = $query->result();
+            //echo $this->db->last_query();
+        $result = $query->num_rows();
+        if ($result > 0 )
+        {
+          //print_r($details); die();
+          return true;
+        }
+        return false; 
     }
 
 
 
     function updt_pass ($input,$upuser)
       {
-        $this->db->where('phone_number',$input['mobile']);
-      $ins=$this->db->update('user_reg', $upuser);
-      //echo $this->db->last_query($ins);
+         $this->db->where('phone_number',$input['mobile']);
+         $ins=$this->db->update('user_reg', $upuser);
+        //echo $this->db->last_query($ins);
       }
 
 
 
     
-/*End of Update Section*/
-/*forget (Recover) Section Starts*/
+/*End of Forget (Recover) Section*/
+/*View details Section Starts*/
+
+public function view_det($input,$serviceName)
+      {
+        $ipJson = json_encode($input);
+
+        $this->db->select(['uid','username','user_pic','patient_id','email','phone_number','status','blood_group','gender','dob','city']);
+        $this->db->from('user_reg');
+        $this->db->where('uid',$input['user_id']);
+        $query = $this->db->get();
+        // echo $this->db->last_query();
+        return $query->result_array();
+         
+     }
+
+
+
+
+
+/*End of View details Section*/
+/*Favrourite Submission Section Starts*/
+
+
+
+
+
+
+
+
+/*End of Favrourite Submission Section*/
+/*Top Hospitals Section Starts*/
+
+
+
+
+
+
+
+
+
+
+/*End of Top Hospitals Section*/
+/* Section Starts*/
 
 
     
