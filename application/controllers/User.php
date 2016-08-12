@@ -11,7 +11,7 @@
 		public function User() {
 			parent::__construct();
 
-			$this->load->model('api/user_model');
+			$this->load->model('user_model');
 			$this->load->library('email');
 			$this->load->library('upload');
 			//$this->load->library('seekahoo_lib');
@@ -52,8 +52,6 @@
 					$ip_array[] = array("email", $ip['email'], "email", "email_id", "Wrong or Invalid Email address.");
 					
 					$ip_array[] = array("mobile", $ip['mobile'], "not_null", "mobile", "Mobile Number is empty.");
-
-					$ip_array[] = array("password", $ip['password'], "not_null", "password", "password is empty.");
 					$validation_array = $this->validator->validate($ip_array);
 					
 					if($ip['password'] != $ip['c_pass'])
@@ -61,7 +59,13 @@
 				     $data['message'] = "Password missmatch.";
 				     $retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
                      } 
-					
+					else if(empty($_POST['password']))
+					 {
+					  $data['message'] = "Password field empty.";
+				      $retVals1 = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
+					 }
+
+
 					else if ($this->user_model->check_mob($ip)) 
 					{
 					 $data['message'] = 'Mobile number alerady registered.';
