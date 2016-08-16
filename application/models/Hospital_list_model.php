@@ -1,5 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Hospital_model extends CI_Model {
+class Hospital_list_model extends CI_Model {
 
 	function searchHosDoc($val,$serviceName){
 		$ipJson = json_encode($val);
@@ -275,7 +275,7 @@ class Hospital_model extends CI_Model {
 			{
 					$query[2][$key]['avg_rating']=0;
 
-				     $query[2][$key]['review_count']=0;
+				    $query[2][$key]['review_count']=0;
 				
 				foreach ($query[0] as  $rating_result) 
 				{
@@ -283,10 +283,10 @@ class Hospital_model extends CI_Model {
 					if($hospital_result['hospital_id']==$rating_result['hospital_id'])
 					{	
 						
-					$query[2][$key]['avg_rating']=	$rating_result['rating'];
+						$query[2][$key]['avg_rating']=	$rating_result['rating'];
 
-				    $query[2][$key]['review_count']=	$rating_result['review_count'];
-				   }
+					    $query[2][$key]['review_count']=	$rating_result['review_count'];
+				    }
 				   
 				} 
 			}
@@ -364,7 +364,7 @@ class Hospital_model extends CI_Model {
 			{
 					$query[2][$key]['avg_rating']=0;
 
-				     $query[2][$key]['review_count']=0;
+				    $query[2][$key]['review_count']=0;
 				
 				foreach ($query[0] as  $rating_result) 
 				{
@@ -372,10 +372,10 @@ class Hospital_model extends CI_Model {
 					if($hospital_result['hospital_id']==$rating_result['hospital_id'])
 					{	
 						
-					$query[2][$key]['avg_rating']=	$rating_result['rating'];
+						$query[2][$key]['avg_rating']=	$rating_result['rating'];
 
-				    $query[2][$key]['review_count']=	$rating_result['review_count'];
-				   }
+					    $query[2][$key]['review_count']=	$rating_result['review_count'];
+				    }
 				   
 				} 
 			}
@@ -409,13 +409,13 @@ class Hospital_model extends CI_Model {
 					    }
 					} 
 				}/*else{
-					foreach ($query[1] as $key=> $hospital_result)
+					foreach ($query[2] as $key=> $hospital_result)
 					{
-						foreach ($query[2] as  $speciality_result) 
+						foreach ($query[1] as  $speciality_result) 
 						{ 
-							if((array_key_exists($hospital_result['hospital_id'], $hospital_speciality_count)) || ((array_key_exists($speciality_result['hospital_id'], $hospital_speciality_count))))
+							if(($hospital_result['hospital_id']==$hospital_id_key) && ($speciality_result['hospital_id']==$hospital_id_key))
 							{	
-								$query[1][$key]['speciality_type']= "";
+								$query[2][$key]['speciality_type']= "Multi_Speciality";
 						    }
 					    }
 					} 
