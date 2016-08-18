@@ -1,12 +1,12 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 	require('application/libraries/REST_Controller.php');
 
-class Hospital extends REST_Controller {
+class Hospital_list extends REST_Controller {
 
 	public function __construct(){
 		parent::__construct();
 		//exit;
-  			$this->load->model('Hospital_model');
+  			$this->load->model('Hospital_list_model');
   			$this->load->model('Speciality_model');
 			$this->load->model('Favorite_model');
 			$this->load->model('Top_hospital_model');
@@ -35,7 +35,7 @@ class Hospital extends REST_Controller {
 			$data['message'] = $validation_array;
 			$retVals = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
 		} else {
-			$retVals[] = $this->Hospital_model->searchHosDoc($ip,$serviceName);	
+			$retVals = $this->Hospital_list_model->searchHosDoc($ip,$serviceName);	
 			//$retVals['hospital_addr'] = $this->Hospital_model->getAllHospitalsAddress();
 			//$retVals['hospital_image'] = $this->Hospital_model->getAllHospitalsImage();
 			//$retVals['special'] = $this->Hospital_model->getAllHospitalsSpl();
@@ -54,3 +54,4 @@ class Hospital extends REST_Controller {
 	}
 	
 }
+>>>>>>> 98fdd13b8f1052f4c0723dc6f72fdd9679037fe4
