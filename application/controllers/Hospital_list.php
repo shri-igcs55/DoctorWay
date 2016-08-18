@@ -6,10 +6,10 @@ class Hospital_list extends REST_Controller {
 	public function __construct(){
 		parent::__construct();
 		//exit;
-  			$this->load->model('Hospital_list_model');
-  			$this->load->model('Speciality_model');
+  			$this->load->model('hospital_list_model');
+  			/*$this->load->model('Speciality_model');
 			$this->load->model('Favorite_model');
-			$this->load->model('Top_hospital_model');
+			$this->load->model('Top_hospital_model');*/
 	}
 
 	public function list_hospital_post(){
@@ -35,7 +35,7 @@ class Hospital_list extends REST_Controller {
 			$data['message'] = $validation_array;
 			$retVals = $this->seekahoo_lib->return_status('error', $serviceName, $data, $ipJson);
 		} else {
-			$retVals = $this->Hospital_list_model->searchHosDoc($ip,$serviceName);	
+			$retVals = $this->hospital_list_model->searchHosDoc($ip,$serviceName);	
 			//$retVals['hospital_addr'] = $this->Hospital_model->getAllHospitalsAddress();
 			//$retVals['hospital_image'] = $this->Hospital_model->getAllHospitalsImage();
 			//$retVals['special'] = $this->Hospital_model->getAllHospitalsSpl();

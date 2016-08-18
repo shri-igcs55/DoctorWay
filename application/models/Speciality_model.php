@@ -33,6 +33,7 @@ class Speciality_model extends CI_Model {
     //End of function to get detail of speciality by id
 
     //Start of function to update speciality
+    
     public function update_speciality($speciality_id){
         $data = array(
                 'speciality_name' => $this->input->post('speciality_name'),
