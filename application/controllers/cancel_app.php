@@ -41,7 +41,12 @@
 					} 
 					else {
 						$retVals = $this->cancel_app_model->update_app($ip, $serviceName);
-						$data['cancel'] = $retVals;
+						print_r($retVals);
+						//exit;
+						if (!isset($retVals)){
+							$data['cancel'] = "Appointment cancel";
+						}
+
 						
 						//$retVals3 = $this->past_app_model->hospital_speciality($ip, $serviceName);
 						//$data['speciality'] = $retVals3;

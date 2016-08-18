@@ -17,11 +17,11 @@
 			$this->db->or_where('status !=','2');
 			
 			$query = $this->db->get();
-			echo $this->db->last_query();
+			//echo $this->db->last_query();
 //echo $test= $this->db->last_query($query);exit();
 			$details = $query->result();
-			print_r($details);
-			exit();		
+			//print_r($details);
+			//exit();		
 			return $details;
 		}
 

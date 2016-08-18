@@ -19,10 +19,10 @@
 		{
 			$serviceName = 'past_app';
 			//getting posted values
-			$ip['hos_id'] = trim($this->input->post('hos_id'));
-			$ip['doc_id'] = trim($this->input->post('doc_id'));
-			$ip['user_id'] = trim($this->input->post('user_id'));
-			$ip['date'] = trim($this->input->post('date'));
+			$ip['hos_id']     = trim($this->input->post('hos_id'));
+			$ip['doc_id']     = trim($this->input->post('doc_id'));
+			$ip['user_id']    = trim($this->input->post('user_id'));
+			$ip['date']       = trim($this->input->post('date'));
 			$ip['patient_id'] = trim($this->input->post('patient_id'));			
 
 			    

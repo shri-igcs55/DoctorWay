@@ -33,8 +33,9 @@ $data = array(
 if ($query == 1) {
 					
 					$last_id = $this->db->insert_id();
-					$this->db->select('name,patient_id,doc_id_fk,date_time_slot,phone');
-				    $this->db->from('appointment');
+					$this->db->select('a.name,a.patient_id,a.doc_id_fk,a.date_time_slot,a.phone,b.doctor_name');
+				    $this->db->from('appointment a');
+				    $this->db->join('doctor b', 'a.dr_hospital_id_fk=b.dr_hospital_id_fk');
 					$this->db->where('id', $last_id );
 
 
