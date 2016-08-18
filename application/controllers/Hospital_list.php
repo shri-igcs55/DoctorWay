@@ -54,4 +54,3 @@ class Hospital_list extends REST_Controller {
 	}
 	
 }
->>>>>>> 98fdd13b8f1052f4c0723dc6f72fdd9679037fe4
