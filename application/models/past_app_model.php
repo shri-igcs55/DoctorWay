@@ -17,9 +17,10 @@
 			$this->db->join('doctor b', 'a.hospital_id = b.dr_hospital_id_fk', 'left');
 			$this->db->join('appointment c', 'b.doctor_id = c.doc_id_fk', 'left');
 			$this->db->join('specialities d', 'b.doctor_speciality = d.speciality_id', 'left');
-			$this->db->where('a.hospital_id',$input['hos_id']);
+			//$this->db->where('a.hospital_id',$input['hos_id']);
 			$this->db->where('c.patient_id',$input['patient_id']);
-			$this->db->where('c.date_time_slot <=',$input['date']);
+			//$this->db->where('c.date_time_slot <=',$input['date']);
+			$this->db->where('c.date_time_slot <= NOW()',NULL, FALSE);
 			$query = $this->db->get();
 			//echo $this->db->last_query();
 

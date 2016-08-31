@@ -314,12 +314,12 @@ function check_update($input)
         $ipJson = json_encode($input);
 
             $up_status = array(
-                      'user_pic' => $input['user_pic'],
-              'username' => $input['username'],
-            'email' => $input['email'],
-            'status'=>'pending',
+                        'user_pic' => $input['user_pic'],
+                        'username' => $input['username'],
+                        'email' => $input['email'],
+                        'status'=>'pending',
                         'phone_number' => $input['mobile'],
-            'blood_group'=>$input['blood_group'],
+                        'blood_group'=>$input['blood_group'],
                         'gender'=>$input['gender'],
                         'dob'=>$input['dob'],
                         'city'=>$input['city'],

@@ -19,7 +19,8 @@
 			$this->db->join('specialities d', 'b.doctor_speciality = d.speciality_id', 'left');
 			$this->db->where('a.hospital_id',$input['hos_id']);
 			$this->db->where('c.patient_id',$input['patient_id']);
-			$this->db->where('c.date_time_slot >=',$input['date']);
+			//$this->db->where('c.date_time_slot >=',$input['date']);
+			$this->db->where('c.date_time_slot >= NOW()',NULL, FALSE);
 			$query = $this->db->get();
 			//echo $this->db->last_query();
 

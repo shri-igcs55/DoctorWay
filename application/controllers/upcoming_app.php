@@ -19,10 +19,10 @@
 		{
 			$serviceName = 'upcoming_app';
 			//getting posted values
-			$ip['hos_id'] = trim($this->input->post('hos_id'));
-			$ip['doc_id'] = trim($this->input->post('doc_id'));
+			//$ip['hos_id'] = trim($this->input->post('hos_id'));
+			//$ip['doc_id'] = trim($this->input->post('doc_id'));
 			$ip['user_id'] = trim($this->input->post('user_id'));
-			$ip['date'] = trim($this->input->post('date'));
+			//$ip['date'] = trim($this->input->post('date'));
 			$ip['patient_id'] = trim($this->input->post('patient_id'));			
 
 			    
@@ -32,7 +32,8 @@
 			//validation
 			$validation_array = 1;
 									
-					$ip_array[] = array("hos_id", $ip['hos_id'], "not_null", "hos_id", "Field is empty.");
+					//$ip_array[] = array("hos_id", $ip['hos_id'], "not_null", "hos_id", "Field is empty.");
+			$ip_array[] = array("user_id", $ip['user_id'], "not_null", "user_id", "Field is empty.");
 				
 					$validation_array = $this->validator->validate($ip_array);
 					
